@@ -124,7 +124,7 @@ sumTo n =  n + sumTo (n-1)
 -- n^k = n(1) * n(2) * ... * n(k), (i) = index. 
 power :: Integer -> Integer -> Integer
 power n 1 = n
-power n k = n * power n k-1
+power n k = n * power n (k-1)
 
 ------------------------------------------------------------------------------
 -- Ex 11: ilog3 n should be the number of times you can divide given
