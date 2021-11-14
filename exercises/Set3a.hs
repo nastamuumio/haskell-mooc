@@ -200,6 +200,7 @@ joinToLength x list = [first ++ last | first <- list, last <- reverse list, leng
 (x:_) +|+ (y:_) = [x, y]
 [] +|+ (y:_) = [y]
 (x:_) +|+ [] = [x]
+[] +|+ []  = []
 
 ------------------------------------------------------------------------------
 -- Ex 11: remember the lectureParticipants example from Lecture 2? We
@@ -216,8 +217,9 @@ joinToLength x list = [first ++ last | first <- list, last <- reverse list, leng
 --   sumRights [Left "bad!", Left "missing"]         ==>  0
 
 sumRights :: [Either a Int] -> Int
-sumRights list = map (either x y) list
-    where x = 
+sumRights [] = 0
+sumRights xs = sum $ map (either (const 0) id) xs
+
 ------------------------------------------------------------------------------
 -- Ex 12: recall the binary function composition operation
 -- (f . g) x = f (g x). In this exercise, your task is to define a function
