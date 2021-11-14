@@ -234,7 +234,9 @@ sumRights xs = sum $ map (either (const 0) id) xs
 --   multiCompose [(3*), (2^), (+1)] 0 ==> 6
 --   multiCompose [(+1), (2^), (3*)] 0 ==> 2
 
-multiCompose fs = todo
+multiCompose :: [a -> a] -> a -> a
+multiCompose [] y = y
+multiCompose (x:xs) y = x $ multiCompose xs y
 
 ------------------------------------------------------------------------------
 -- Ex 13: let's consider another way to compose multiple functions. Given
@@ -253,7 +255,8 @@ multiCompose fs = todo
 --   multiApp reverse [tail, take 2, reverse] "foo" ==> ["oof","fo","oo"]
 --   multiApp concat [take 3, reverse] "race" ==> "racecar"
 
-multiApp = todo
+multiApp :: ([b] -> t) -> [a -> b] -> a -> t
+multiApp f gs x = f $ map ($ x) gs
 
 ------------------------------------------------------------------------------
 -- Ex 14: in this exercise you get to implement an interpreter for a
@@ -288,4 +291,4 @@ multiApp = todo
 -- function, the surprise won't work.
 
 interpreter :: [String] -> [String]
-interpreter commands = todo
+interpreter = todo
